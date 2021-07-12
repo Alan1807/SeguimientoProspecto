@@ -137,6 +137,10 @@
                                                     <p runat="server" id="pEstatusArchivo" class="estatus-archivo">
                                                         <span class="fa fa-upload"></span> Cargar archivo
                                                     </p>
+                                                    <span>
+                                                        <span class="estatus-archivo"><strong>Formatos: </strong>pdf, jpg, png, doc</span>
+                                                    </span>
+                                                    <br />
                                                     <asp:LinkButton runat="server" ID="btnSubirArchivos" CssClass="badge badge-success text-white" 
                                                         OnClick="btnSubirArchivos_Click" OnClientClick="return validaNombreDoc();">
                                                         <span class="fa fa-plus"></span> Agregar

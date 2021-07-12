@@ -169,8 +169,9 @@ function validaExtension() {
 
     nfile = nfile.replace(/%20/g, "");
     var ext = nfile.match(/\.([^\.]+)$/)[1];
+    ext = ext.toLowerCase();
 
-    if (!(ext == "pdf" || ext == "jpg" || ext == "png")) {
+    if (!(ext == "pdf" || ext == "jpg" || ext == "png" || ext == "doc" || ext == "docx")) {
         var btnUpdate = document.getElementsByClassName("ajax__fileupload_uploadbutton");
         botones = btnUpdate;
 
