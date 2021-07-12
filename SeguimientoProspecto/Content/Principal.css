@@ -1,0 +1,131 @@
+﻿body {
+    background-color: #f7f7f8!important;
+}
+
+.card-shadow {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+th {
+    background-color: #d2d6de;
+    text-align: left !important;
+    color: black !important;
+}
+
+/*----FILEUPLOAD----*/
+.file-icon {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 50px !important;
+}
+
+.cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.estatus-archivo {
+    color: gray;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+
+.loader {
+    display: none;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.28);
+    z-index: 1700;
+}
+
+.loader > img {
+    position: absolute;
+    top: 50%;
+    left: 51%;
+    width: 150px;
+    height: 150px;
+    margin-top: -100px;
+    margin-left: -100px;
+}
+
+.notification {
+    position: fixed !important;
+    top: 0px !important;
+    right: 0px !important;
+    border-radius: 5px !important;
+    margin-right: 10px !important;
+    margin-top: 10px !important;
+}
+
+.notification-show {
+    animation-name: show-notification;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.notification-hide {
+    animation-name: hide-notification;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes show-notification {
+    from {
+        opacity: 0;
+        margin-left: 10px;
+    }
+
+    to {
+        opacity: 1;
+        margin-left: 0px;
+    }
+}
+
+@keyframes hide-notification {
+    from {
+        opacity: 1;
+        margin-left: 0px;
+    }
+
+    to {
+        opacity: 0;
+        margin-left: 10px;
+    }
+}
+
+.rfc {
+    text-transform: uppercase;
+}
+
+/*PAGINACION*/
+.pagination-gv > td {
+    border-color: transparent;
+}
+
+.pagination-gv > td > table > tbody > tr > td {
+    border-top: none !important;
+}
+
+.pagination-gv > td > table > tbody > tr > td > a {
+    text-decoration: none !important;
+}
+
+.pagination-gv:hover {
+    background-color: transparent !important;
+}
+
+.pagination-gv > td > table > tbody > tr:hover {
+    background-color: transparent !important;
+}
+
+.pagination-gv > td > table > tbody > tr > td {
+    font-weight: bolder;
+    border-color: transparent;
+}
