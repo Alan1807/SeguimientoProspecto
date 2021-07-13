@@ -125,6 +125,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\Views\CapturaProspecto.js" />
+    <Content Include="Scripts\Views\DetalleProspecto.js" />
     <Content Include="Scripts\Views\ListadoProspecto.js" />
     <Content Include="Views\CapturaProspecto.aspx" />
     <Content Include="Views\DetalleProspecto.aspx" />

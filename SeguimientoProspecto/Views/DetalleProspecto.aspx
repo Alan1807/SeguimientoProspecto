@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Detalle de Prospecto</title>
+    <title>Evaluación de Prospecto</title>
 
     <link href="../Content/Principal.css" rel="stylesheet" />
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
@@ -14,6 +14,7 @@
     <script src="../Scripts/jquery-3.0.0.min.js"></script>
     <script src="../Scripts/bootstrap.min.js"></script>
     <script src="../Scripts/Views/ListadoProspecto.js"></script>
+    <script src="../Scripts/Views/DetalleProspecto.js"></script>
 </head>
 <body>
     <form id="frmDetalleProspecto" runat="server">
@@ -91,6 +92,10 @@
                                 <div class="col-6 col-sm-6 col-lg-6 mb-3">
                                     <asp:Label runat="server" CssClass="text-muted font-weight-bold">Estatus</asp:Label><br />
                                     <asp:Label runat="server" ID="lblEstatus" CssClass="font-weight-bold"></asp:Label>
+                                </div>
+                                <div runat="server" id="divObservacionesRechazo" class="col-6 col-sm-6 col-lg-6 mb-3">
+                                    <asp:Label runat="server" CssClass="text-muted font-weight-bold">Observaciones de rechazo</asp:Label><br />
+                                    <asp:Label runat="server" ID="lblObservacionesRechazo" CssClass="font-weight-bold"></asp:Label>
                                 </div>
                             </div>
                         </ContentTemplate>
@@ -211,6 +216,13 @@
                             <div class="modal-body modal-body-color container">
                                 <div class="row">
                                     <div class="col">
+                                        <asp:Label runat="server" CssClass="text-muted font-weight-bold">Observaciones de Rechazo:</asp:Label>
+                                        <asp:TextBox runat="server" ID="txtObservacionesRechazo" ClientIDMode="Static" CssClass="form-control" 
+                                            TextMode="MultiLine" MaxLength="500"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
                                         <h6>
                                             Está por rechazar el prospecto
                                             <label runat="server" class="font-weight-bold" id="lblNombre_rechazo"></label>
@@ -226,7 +238,7 @@
                                     <span class="fa fa-times"></span> Cerrar
                                 </button>
                                 <asp:LinkButton runat="server" ID="btnConfirmaRechazo" CssClass="btn btn-success" 
-                                    OnClientClick="hideShowLoader(true);" OnClick="btnConfirmaRechazo_Click">
+                                    OnClientClick="return validaRechazo();" OnClick="btnConfirmaRechazo_Click">
                                     <span class="fa fa-check"></span> Rechazar
                                 </asp:LinkButton>
                             </div>

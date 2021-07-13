@@ -7,9 +7,12 @@
 }
 
 th {
-    background-color: #d2d6de;
-    text-align: left !important;
+    background-color: #d2d6de;    
     color: black !important;
+}
+
+.modal-body-color {
+    background-color: #f7f7f8;
 }
 
 /*----FILEUPLOAD----*/
@@ -62,6 +65,7 @@ th {
     border-radius: 5px !important;
     margin-right: 10px !important;
     margin-top: 10px !important;
+    z-index: 1051!important;
 }
 
 .notification-show {

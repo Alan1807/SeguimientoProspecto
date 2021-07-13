@@ -75,24 +75,28 @@ namespace SeguimientoProspecto.Views
                 lblRfc.Text = rowProspecto["RFC"].ToString();
                 lblEstatus.Text = rowProspecto["NombreEstatus"].ToString();
                 idEstatus = Convert.ToInt32(rowProspecto["idEstatus"]);
+                lblObservacionesRechazo.Text = idEstatus == 3 ? rowProspecto["ObservacionRechazo"].ToString() : string.Empty;
 
                 if (idEstatus == 1) // Enviado
                 {
                     estatusClass = "text-primary";
                     btnRechazar.Visible = true;
                     btnAutorizar.Visible = true;
+                    divObservacionesRechazo.Visible = false;
                 }
                 else if (idEstatus == 2) // Autorizado
                 {
                     estatusClass = "text-success";
                     btnRechazar.Visible = false;
                     btnAutorizar.Visible = false;
+                    divObservacionesRechazo.Visible = false;
                 }
                 else if (idEstatus == 3) // Rechazado
                 {
                     estatusClass = "text-danger";
                     btnRechazar.Visible = false;
                     btnAutorizar.Visible = false;
+                    divObservacionesRechazo.Visible = true;
                 }
 
                 lblEstatus.CssClass += " " + estatusClass;
@@ -235,7 +239,7 @@ namespace SeguimientoProspecto.Views
                 }
 
                 idProspecto = Convert.ToInt32(Session["idProspecto"]);
-                resultado = clsprospecto.autorizaRechazaProspecto(true, idProspecto);
+                resultado = clsprospecto.autorizaRechazaProspecto(true, idProspecto, "");
                 
                 if (resultado.Error)
                 {
@@ -284,6 +288,7 @@ namespace SeguimientoProspecto.Views
         protected void btnConfirmaRechazo_Click(object sender, EventArgs e)
         {
             int idProspecto = 0;
+            string observacionesRechazo = string.Empty;
 
             try
             {
@@ -294,7 +299,8 @@ namespace SeguimientoProspecto.Views
                 }
 
                 idProspecto = Convert.ToInt32(Session["idProspecto"]);
-                resultado = clsprospecto.autorizaRechazaProspecto(false, idProspecto);
+                observacionesRechazo = txtObservacionesRechazo.Text;
+                resultado = clsprospecto.autorizaRechazaProspecto(false, idProspecto, observacionesRechazo);
 
                 if (resultado.Error)
                 {
@@ -308,8 +314,11 @@ namespace SeguimientoProspecto.Views
                 lblEstatus.CssClass = lblEstatus.CssClass.Replace("text-success", string.Empty);
                 lblEstatus.CssClass = lblEstatus.CssClass.Replace("text-primary", string.Empty);
                 lblEstatus.CssClass += " text-danger";
+                lblObservacionesRechazo.Text = observacionesRechazo;
+
                 btnRechazar.Visible = false;
                 btnAutorizar.Visible = false;
+                divObservacionesRechazo.Visible = true;
 
                 utils.hideShowModal(this, "mdlConfRechazo", false);
             }

@@ -88,21 +88,27 @@
                                     OnRowCommand="gvListadoProspecto_RowCommand" OnPageIndexChanging="gvListadoProspecto_PageIndexChanging"
                                 >
                                 <Columns>
-                                    <asp:BoundField DataField="NombreCompleto" HeaderText="Nombre Completo" />
-                                    <asp:BoundField DataField="Calle" HeaderText="Calle" />
-                                    <asp:BoundField DataField="Colonia" HeaderText="Colonia" />
-                                    <asp:BoundField DataField="CodigoPostal" HeaderText="Código Postal" />
-                                    <asp:BoundField DataField="RFC" HeaderText="RFC" />
+                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                    <asp:BoundField DataField="PrimerApellido" HeaderText="Primer Apellido" />
+                                    <asp:BoundField DataField="SegundoApellido" HeaderText="Segundo Apellido" />
                                     <asp:TemplateField HeaderText="Estatus">
                                         <ItemTemplate>
                                             <asp:Label runat="server" ID="lblNombreEstatus" CssClass="font-weight-bold" Text='<%# Eval("NombreEstatus") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Ver" HeaderStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:LinkButton runat="server" ID="btnVer" CssClass="text-info" CommandName="Ver"  OnClientClick="hideShowLoader(true);"
+                                            <asp:LinkButton runat="server" ID="btnVer" CssClass="text-info" CommandName="Ver" OnClientClick="hideShowLoader(true);"
                                                 CommandArgument="<%# ((GridViewRow)Container).RowIndex %>">
                                                 <span class="fa fa-eye"></span>
+                                            </asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Evaluar" HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="100">
+                                        <ItemTemplate>
+                                            <asp:LinkButton runat="server" ID="btnEvaluacion" CssClass="text-primary" CommandName="Evaluar" OnClientClick="hideShowLoader(true);"
+                                                CommandArgument="<%# ((GridViewRow)Container).RowIndex %>">
+                                                <span class="fa fa-clipboard"></span>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -133,6 +139,126 @@
         <div class="notification alert d-none" role="alert">
           <h4 id="hTituloNoti" class="alert-heading"></h4>
           <p id="pDescNoti"></p>
+        </div>
+
+        <!--MODAL DE INFORMACIÓN DE PROSPECTO-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="mdlProspectoInfo">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><span class="fa fa-file">&nbsp;</span>Información de Prospecto</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body modal-body-color">
+                        <div class="container-fluid pt-3 pb-3">
+                            <asp:UpdatePanel runat="server" ID="udpInfoProspecto">
+                                <ContentTemplate>
+                                    <div class="row bg-white card-shadow pt-3 pb-3">
+                                        <div class="col-12 mb-3">
+                                            <h4>Datos generales</h4>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">Nombre</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblNombre" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">Primer Apellido</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblPrimerApellido" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">Segundo Apellido</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblSegundoApellido" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">Calle</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblCalle" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">Número</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblNumero" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">Colonia</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblColonia" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">Código Postal</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblCodigoPostal" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">Teléfono</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblTelefono" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">RFC</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblRfc" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">Estatus</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblEstatus" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                        <div runat="server" id="divObservacionesRechazo" class="col-6 col-sm-6 col-lg-6 mb-3">
+                                            <asp:Label runat="server" CssClass="text-muted font-weight-bold">Observaciones de rechazo</asp:Label><br />
+                                            <asp:Label runat="server" ID="lblObservacionesRechazo" CssClass="font-weight-bold"></asp:Label>
+                                        </div>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                            
+                            <div class="row mt-3">
+                                 <div class="col-12">
+                                    <div class="row mt-3">
+                                        <h4>Documentos</h4>
+                                    </div>
+                                    <asp:UpdatePanel runat="server" ID="udpDocumentos">
+                                        <ContentTemplate>
+
+                                            <div class="row mt-3 mt-lg-0">
+                                                <div class="col pl-0 pr-0">
+                                                    <asp:GridView runat="server" ID="grvDocumentos" AutoGenerateColumns="false" CssClass="table bg-white mb-0 card-shadow"
+                                                        GridLines="None" ShowHeaderWhenEmpty="true" OnRowCommand="grvDocumentos_RowCommand"
+                                                        DataKeyNames="idDocumento, Nombre, rutaFTP, idProspecto" 
+                                                        ClientIDMode="Static">
+                                                        <Columns>
+                                                            <asp:TemplateField HeaderText="Documento">
+                                                                <ItemTemplate>
+                                                                    <asp:Label runat="server" ID="lblNombreDoc" Text='<%# Eval("Nombre") %>' CssClass="data" ></asp:Label>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField ItemStyle-Width="50">
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton runat="server" CssClass="text-primary" CommandName="Descargar" 
+                                                                        CommandArgument="<%# ((GridViewRow)Container).RowIndex %>">
+                                                                        <span class="fa fa-download"></span>
+                                                                    </asp:LinkButton>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                    <!--EMPTY STATE GRID DOCUMENTOS-->
+                                                    <div runat="server" id="divEgDocumentos" class="text-center mt-0 pt-4 pb-3 bg-white card-shadow" visible="true">
+                                                        <span class="fa fa-archive text-muted mb-2" style="font-size:8em!important;"></span>
+                                                        <p class="font-weight-bold font-size-x1_5 text-muted">Sin información para mostrar</p>
+                                                        <p class="text-muted">No se han encontrado documentos para listar.                       
+                                                    </div>
+                    
+                                                </div>
+                                            </div>
+
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:PostBackTrigger ControlID="grvDocumentos" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal"><span class="fa fa-times"></span> Cerrar</button>
+                    </div>     
+                </div>
+            </div>
         </div>
     </form>
 </body>

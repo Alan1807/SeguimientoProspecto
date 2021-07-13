@@ -168,6 +168,24 @@ namespace SeguimientoProspecto.Views
         protected global::System.Web.UI.WebControls.Label lblEstatus;
 
         /// <summary>
+        /// Control divObservacionesRechazo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divObservacionesRechazo;
+
+        /// <summary>
+        /// Control lblObservacionesRechazo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblObservacionesRechazo;
+
+        /// <summary>
         /// Control udpDocumentos.
         /// </summary>
         /// <remarks>
@@ -229,6 +247,15 @@ namespace SeguimientoProspecto.Views
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel udpMdlConfRechazo;
+
+        /// <summary>
+        /// Control txtObservacionesRechazo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtObservacionesRechazo;
 
         /// <summary>
         /// Control lblNombre_rechazo.

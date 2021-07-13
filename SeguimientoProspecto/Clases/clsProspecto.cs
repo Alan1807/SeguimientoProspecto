@@ -502,14 +502,14 @@ namespace SeguimientoProspecto.Clases
         /// </summary>
         /// <param name="Autoriza">True: Autoriza | False: Rechaza</param>
         /// <returns></returns>
-        public Result autorizaRechazaProspecto(bool Autoriza, int idProspecto)
+        public Result autorizaRechazaProspecto(bool Autoriza, int idProspecto, string observacionesRechazo)
         {
             SqlConnection connection = new SqlConnection();
             SqlCommand command = new SqlCommand();
             SqlDataAdapter data = new SqlDataAdapter();
             DataSet dsResult = new DataSet();
             Result result = new Result();
-            SqlParameter[] sqlParametros = new SqlParameter[3];
+            SqlParameter[] sqlParametros = new SqlParameter[4];
 
             try
             {
@@ -530,6 +530,13 @@ namespace SeguimientoProspecto.Clases
                 sqlParametros[2].SqlDbType = SqlDbType.Bit;
                 sqlParametros[2].Direction = ParameterDirection.Input;
                 sqlParametros[2].Value = Autoriza;
+
+                sqlParametros[3] = new SqlParameter();
+                sqlParametros[3].ParameterName = "@ObservacionRechazo";
+                sqlParametros[3].SqlDbType = SqlDbType.VarChar;
+                sqlParametros[3].Size = 500;
+                sqlParametros[3].Direction = ParameterDirection.Input;
+                sqlParametros[3].Value = observacionesRechazo;
 
                 connection.ConnectionString = ConfigurationManager.ConnectionStrings["ProspectoConnection"].ConnectionString;
 
